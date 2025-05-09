@@ -49,6 +49,10 @@ So, we have 10 users, each with a unique first and last name
 
 Then I implemented the dropdown like this:
  ```dart
+ User? _selectedUser;
+
+...
+
 // dropdown
 DropdownButtonFormField<User>(
     value: _selectedUser,
@@ -78,3 +82,53 @@ Here’s how it works:
 - The label inside each dropdown item is the user’s full name, using user.toString()
 - Validation ensures that a selection is made
 - To make sure the dropdown can compare User objects correctly, I also overrode the == and hashCode methods in the User class.
+``` dart
+// user.dart
+class User {
+  final String firstName;
+  final String lastName;
+
+  User(this.firstName, this.lastName);
+
+  @override
+  String toString() => '$firstName $lastName';
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is User &&
+          firstName == other.firstName &&
+          lastName == other.lastName;
+
+  @override
+  int get hashCode => firstName.hashCode ^ lastName.hashCode;
+}
+```
+
+## SaveForm
+
+
+``` dart
+// save button
+ElevatedButton(
+    onPressed: _saveForm,
+    child: const Text('Save'),
+),
+```
+
+```dart
+void _saveForm() {
+if (_formKey.currentState!.validate()) {
+    final formData = {
+    'doubleValue': double.tryParse(_doubleController.text),
+    'stringValue': _stringController.text,
+    'radioValue': _selectedRadio,
+    'checkbox1': _checkbox1,
+    'checkbox2': _checkbox2,
+    'checkbox3': _checkbox3,
+    'dropdownValue': _selectedUser,
+    };
+    print(formData);
+}
+}
+```
