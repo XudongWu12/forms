@@ -35,8 +35,33 @@
 ```
 
 ## How to retrieve the value of a textfield
-![alt text](image-2.png)
+![alt text](image-1.png)
 
+``` dart
+late TextEditingController _doubleController;
+late TextEditingController _stringController;
+```
+```dart
+_doubleController = TextEditingController(
+    text: widget.initialValues['doubleValue']?.toString() ?? '',
+);
+_stringController = TextEditingController(
+    text: widget.initialValues['stringValue'] ?? '',
+);
+```
+```dart
+TextFormField(
+    controller: _doubleController,
+)
+```
+
+```dart
+  'doubleValue': double.tryParse(_doubleController.text),
+  'stringValue': _stringController.text,
+```
+
+## How to validate the textField
+![alt text](image-2.png)
 ``` dart
 class _FormWidgetState extends State<FormWidget> {
   final _formKey = GlobalKey<FormState>();
@@ -59,36 +84,6 @@ TextFormField(
         return null;
     },
 ),
-```
-```dart
-TextFormField(
-    controller: _doubleController,
-)
-```
-```dart
-  'doubleValue': double.tryParse(_doubleController.text),
-  'stringValue': _stringController.text,
-```
-
-## How to validate the textField
-![alt text](image-1.png)
-
-``` dart
-late TextEditingController _doubleController;
-late TextEditingController _stringController;
-```
-```dart
-_doubleController = TextEditingController(
-    text: widget.initialValues['doubleValue']?.toString() ?? '',
-);
-_stringController = TextEditingController(
-    text: widget.initialValues['stringValue'] ?? '',
-);
-```
-```dart
-TextFormField(
-    controller: _doubleController,
-)
 ```
 ```dart
   void _saveForm() {
