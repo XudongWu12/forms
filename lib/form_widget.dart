@@ -116,9 +116,9 @@ class _FormWidgetState extends State<FormWidget> {
               Column(
                 children: RadioOptions.values.map((option) {
                   return RadioListTile<RadioOptions>(
-                    title: Text(option.toString().split('.').last),
+                    title: Text(option.name),
                     value: option,
-                    groupValue: _selectedRadio,
+                    groupValue: _selectedRadio, 
                     onChanged: (value) {
                       setState(() {
                         _selectedRadio = value;
