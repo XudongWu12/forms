@@ -34,33 +34,6 @@
 }
 ```
 
-## How to validate the textField
-![alt text](image-1.png)
-
-``` dart
-late TextEditingController _doubleController;
-late TextEditingController _stringController;
-```
-```dart
-_doubleController = TextEditingController(
-    text: widget.initialValues['doubleValue']?.toString() ?? '',
-);
-_stringController = TextEditingController(
-    text: widget.initialValues['stringValue'] ?? '',
-);
-```
-```dart
-TextFormField(
-    controller: _doubleController,
-)
-```
-```dart
-  void _saveForm() {
-    if (_formKey.currentState!.validate()) {
-      // ...
-    }
-  }
-```
 ## How to retrieve the value of a textfield
 ![alt text](image-2.png)
 
@@ -92,6 +65,46 @@ TextFormField(
     controller: _doubleController,
 )
 ```
+```dart
+  void _saveForm() {
+    if (_formKey.currentState!.validate()) {
+      // ...
+    }
+  }
+```
+
+## How to validate the textField
+![alt text](image-1.png)
+
+``` dart
+late TextEditingController _doubleController;
+late TextEditingController _stringController;
+```
+```dart
+_doubleController = TextEditingController(
+    text: widget.initialValues['doubleValue']?.toString() ?? '',
+);
+_stringController = TextEditingController(
+    text: widget.initialValues['stringValue'] ?? '',
+);
+```
+```dart
+TextFormField(
+    controller: _doubleController,
+)
+```
+```dart
+  void _saveForm() {
+    if (_formKey.currentState!.validate()) {
+        final formData = {
+            'doubleValue': double.tryParse(_doubleController.text),
+            'stringValue': _stringController.text,
+            // ...
+        };
+    }
+  }
+```
+
 
 
 ## Dropdown
