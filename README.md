@@ -108,8 +108,8 @@ Dropdown menus are commonly used when the user needs to select one option from a
 So our goal is to build a dropdown that works with custom User objects,
 
 
-#### 3. My Implementation
-First, I created the list of users using List.generate:
+#### 3. Implementation
+First, created the list of users using List.generate:
 ``` dart
 final List<User> _users = List.generate(
     10,
@@ -123,7 +123,7 @@ So, we have 10 users, each with a unique first and last name
 
 
 
-Then I implemented the dropdown like this:
+Then implemented the dropdown like this:
  ```dart
  User? _selectedUser;
 
