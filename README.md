@@ -1,22 +1,98 @@
-# flutter_application_1
+# flutter_application_form
 
-A new Flutter project.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
 
 
 ![alt text](image.png)
+
+
+## Init and dispose
+``` dart
+@override
+  void initState() {
+    super.initState();
+    _doubleController = TextEditingController(
+      text: widget.initialValues['doubleValue']?.toString() ?? '',
+    );
+    _stringController = TextEditingController(
+      text: widget.initialValues['stringValue'] ?? '',
+    );
+    _selectedRadio = widget.initialValues['radioValue'];
+    _checkbox1 = widget.initialValues['checkbox1'] ?? false;
+    _checkbox2 = widget.initialValues['checkbox2'] ?? false;
+    _checkbox3 = widget.initialValues['checkbox3'] ?? false;
+    _selectedUser = widget.initialValues['dropdownValue'];
+}
+```
+``` dart
+@override
+  void dispose() {
+    _doubleController.dispose();
+    _stringController.dispose();
+    super.dispose();
+}
+```
+
+## How to validate the textField
+![alt text](image-1.png)
+
+``` dart
+late TextEditingController _doubleController;
+late TextEditingController _stringController;
+```
+```dart
+_doubleController = TextEditingController(
+    text: widget.initialValues['doubleValue']?.toString() ?? '',
+);
+_stringController = TextEditingController(
+    text: widget.initialValues['stringValue'] ?? '',
+);
+```
+```dart
+TextFormField(
+    controller: _doubleController,
+)
+```
+```dart
+  void _saveForm() {
+    if (_formKey.currentState!.validate()) {
+      // ...
+    }
+  }
+```
+## How to retrieve the value of a textfield
+![alt text](image-2.png)
+
+``` dart
+class _FormWidgetState extends State<FormWidget> {
+  final _formKey = GlobalKey<FormState>();
+}
+```
+
+```dart
+TextFormField(
+    controller: _doubleController,
+    decoration: const InputDecoration(labelText: 'Enter a number'),
+    keyboardType: TextInputType.number,
+    validator: (value) {
+        final number = double.tryParse(value ?? '');
+        if (number == null) {
+        return 'Please enter a valid number';
+        }
+        if (number < 3.0 || number > 10.0) {
+        return 'Number must be between 3.00 and 10.00';
+        }
+        return null;
+    },
+),
+```
+```dart
+TextFormField(
+    controller: _doubleController,
+)
+```
+
 
 ## Dropdown
 
