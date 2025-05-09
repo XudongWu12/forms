@@ -66,11 +66,8 @@ TextFormField(
 )
 ```
 ```dart
-  void _saveForm() {
-    if (_formKey.currentState!.validate()) {
-      // ...
-    }
-  }
+  'doubleValue': double.tryParse(_doubleController.text),
+  'stringValue': _stringController.text,
 ```
 
 ## How to validate the textField
@@ -97,8 +94,7 @@ TextFormField(
   void _saveForm() {
     if (_formKey.currentState!.validate()) {
         final formData = {
-            'doubleValue': double.tryParse(_doubleController.text),
-            'stringValue': _stringController.text,
+            
             // ...
         };
     }
